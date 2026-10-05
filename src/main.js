@@ -7,6 +7,7 @@ import {
   MISMATCH_DELAY,
   RESULT_STORAGE_KEY,
 } from './js/gameConfig.js';
+import { getMovesWord } from './js/formatMoves.js';
 import { shuffle } from './js/shuffle.js';
 
 const app = document.querySelector('#app');
@@ -321,25 +322,6 @@ function showVictoryModal() {
 
   saveButton = modal.actionButtons[0];
   nameInput.focus();
-}
-
-function getMovesWord(count) {
-  const lastTwoDigits = count % 100;
-
-  if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
-    return 'ходов';
-  }
-
-  switch (count % 10) {
-    case 1:
-      return 'ход';
-    case 2:
-    case 3:
-    case 4:
-      return 'хода';
-    default:
-      return 'ходов';
-  }
 }
 
 function showLeaderboard() {
