@@ -1,5 +1,6 @@
 import './scss/style.scss';
 import { createElement } from './js/createElement.js';
+import { createCard } from './js/createCard.js';
 import { shuffle } from './js/shuffle.js';
 
 const RESULT_STORAGE_KEY = 'memory-game-results';
@@ -136,35 +137,6 @@ function createStat(label, valueElement) {
   });
 }
 
-function createCard(card, index) {
-  const cardButton = createElement('button', {
-    className: 'card',
-    attributes: {
-      type: 'button',
-      'aria-label': `Закрытая карточка ${index + 1}`,
-    },
-    on: { click: () => handleCardClick(card, cardButton) },
-    children: [
-      createElement('span', {
-        className: 'card__inner',
-        attributes: { 'aria-hidden': 'true' },
-        children: [
-          createElement('span', {
-            className: 'card__face card__face--front',
-            text: card.symbol,
-          }),
-          createElement('span', {
-            className: 'card__face card__face--back',
-            text: '★',
-          }),
-        ],
-      }),
-    ],
-  });
-
-  return cardButton;
-}
-
 function handleCardClick(card, cardElement) {
   if (isLocked || card.isFlipped || card.isMatched) {
     return;
@@ -254,7 +226,11 @@ function startNewGame() {
   updateStats();
   pairsValue.textContent = `0 / ${CARD_SYMBOLS.length}`;
   gameStatus.textContent = 'Откройте две карточки и найдите одинаковые картинки.';
-  cardGrid.replaceChildren(...cards.map(createCard));
+  cardGrid.replaceChildren(
+    ...cards.map((card, index) =>
+      createCard(card, index, handleCardClick),
+    ),
+  );
 }
 
 function showVictoryModal() {
