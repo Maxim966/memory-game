@@ -1,5 +1,6 @@
 import './scss/style.scss';
 import { createElement } from './js/createElement.js';
+import { shuffle } from './js/shuffle.js';
 
 const RESULT_STORAGE_KEY = 'memory-game-results';
 const CARD_SYMBOLS = ['🍋', '🍓', '🍉', '🍇', '🍊', '🍒', '🥝', '🍍'];
@@ -133,20 +134,6 @@ function createStat(label, valueElement) {
       valueElement,
     ],
   });
-}
-
-function shuffle(items) {
-  const shuffled = [...items];
-
-  for (let index = shuffled.length - 1; index > 0; index -= 1) {
-    const randomIndex = Math.floor(Math.random() * (index + 1));
-    [shuffled[index], shuffled[randomIndex]] = [
-      shuffled[randomIndex],
-      shuffled[index],
-    ];
-  }
-
-  return shuffled;
 }
 
 function createCard(card, index) {
