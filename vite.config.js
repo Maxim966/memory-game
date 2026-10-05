@@ -23,7 +23,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
-        menu: 'menu.html',
       },
       output: {
         entryFileNames: 'assets/[name].js',
