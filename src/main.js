@@ -1,11 +1,13 @@
 import './scss/style.scss';
 import { createElement } from './js/createElement.js';
 import { createCard } from './js/createCard.js';
+import {
+  CARD_SYMBOLS,
+  GAME_STATUS,
+  MISMATCH_DELAY,
+  RESULT_STORAGE_KEY,
+} from './js/gameConfig.js';
 import { shuffle } from './js/shuffle.js';
-
-const RESULT_STORAGE_KEY = 'memory-game-results';
-const CARD_SYMBOLS = ['🍋', '🍓', '🍉', '🍇', '🍊', '🍒', '🥝', '🍍'];
-const MISMATCH_DELAY = 1000;
 
 const app = document.querySelector('#app');
 
@@ -37,7 +39,7 @@ const cardGrid = createElement('div', {
 const gameStatus = createElement('p', {
   className: 'game__status',
   attributes: { 'aria-live': 'polite' },
-  text: 'Откройте две карточки и найдите одинаковые картинки.',
+  text: GAME_STATUS.ready,
 });
 
 const newGameButton = createElement('button', {
@@ -172,10 +174,10 @@ function handleCardClick(card, cardElement) {
     foundPairs += 1;
     flippedCards = [];
     pairsValue.textContent = `${foundPairs} / ${CARD_SYMBOLS.length}`;
-    gameStatus.textContent = 'Отлично! Пара найдена.';
+    gameStatus.textContent = GAME_STATUS.matched;
 
     if (foundPairs === CARD_SYMBOLS.length) {
-      gameStatus.textContent = 'Поздравляем! Вы нашли все пары.';
+      gameStatus.textContent = GAME_STATUS.won;
       showVictoryModal();
     }
 
@@ -183,7 +185,7 @@ function handleCardClick(card, cardElement) {
   }
 
   isLocked = true;
-  gameStatus.textContent = 'Не совпали. Запомните карточки — они скоро закроются.';
+  gameStatus.textContent = GAME_STATUS.mismatch;
   mismatchTimeout = window.setTimeout(() => {
     for (const openedCard of flippedCards) {
       openedCard.card.isFlipped = false;
@@ -197,7 +199,7 @@ function handleCardClick(card, cardElement) {
     flippedCards = [];
     mismatchTimeout = null;
     isLocked = false;
-    gameStatus.textContent = 'Откройте две карточки и найдите одинаковые картинки.';
+    gameStatus.textContent = GAME_STATUS.ready;
   }, MISMATCH_DELAY);
 }
 
@@ -225,7 +227,7 @@ function startNewGame() {
 
   updateStats();
   pairsValue.textContent = `0 / ${CARD_SYMBOLS.length}`;
-  gameStatus.textContent = 'Откройте две карточки и найдите одинаковые картинки.';
+  gameStatus.textContent = GAME_STATUS.ready;
   cardGrid.replaceChildren(
     ...cards.map((card, index) =>
       createCard(card, index, handleCardClick),
