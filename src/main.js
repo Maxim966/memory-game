@@ -5,9 +5,12 @@ import {
   CARD_SYMBOLS,
   GAME_STATUS,
   MISMATCH_DELAY,
-  RESULT_STORAGE_KEY,
 } from './js/gameConfig.js';
 import { getMovesWord } from './js/formatMoves.js';
+import {
+  loadLeaderboardResults,
+  saveLeaderboardResult,
+} from './js/leaderboardStorage.js';
 import { shuffle } from './js/shuffle.js';
 
 const app = document.querySelector('#app');
@@ -377,50 +380,6 @@ function showLeaderboard() {
     content,
     actions: [{ label: 'Закрыть', variant: 'secondary', onClick: closeModal }],
   });
-}
-
-function loadLeaderboardResults() {
-  const storedResults = window.localStorage.getItem(RESULT_STORAGE_KEY);
-
-  if (storedResults === null) {
-    return [];
-  }
-
-  const results = JSON.parse(storedResults);
-
-  if (!Array.isArray(results) || !results.every(isValidResult)) {
-    throw new Error('Некорректный формат сохранённых результатов.');
-  }
-
-  return results.sort(
-    (first, second) =>
-      first.moves - second.moves ||
-      new Date(first.date).getTime() - new Date(second.date).getTime(),
-  );
-}
-
-function isValidResult(result) {
-  return (
-    result !== null &&
-    typeof result === 'object' &&
-    typeof result.name === 'string' &&
-    result.name.trim().length > 0 &&
-    Number.isInteger(result.moves) &&
-    result.moves > 0 &&
-    typeof result.date === 'string' &&
-    Number.isFinite(new Date(result.date).getTime())
-  );
-}
-
-function saveLeaderboardResult(result) {
-  const results = loadLeaderboardResults();
-  results.push(result);
-  results.sort(
-    (first, second) =>
-      first.moves - second.moves ||
-      new Date(first.date).getTime() - new Date(second.date).getTime(),
-  );
-  window.localStorage.setItem(RESULT_STORAGE_KEY, JSON.stringify(results.slice(0, 10)));
 }
 
 function showModal({ title, content, actions = [] }) {
