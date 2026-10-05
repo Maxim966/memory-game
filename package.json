@@ -1,0 +1,23 @@
+{
+  "name": "memory-game",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "sass": "^1.105.1",
+    "sharp": "^0.35.5",
+    "svgp": "^0.1.0-alpha.1",
+    "vite": "^8.3.0",
+    "vite-plugin-image-optimizer": "^2.0.3",
+    "vite-plugin-svg-spritemap": "^2.0.1"
+  },
+  "dependencies": {
+    "modern-normalize": "^3.0.1"
+  }
+}
