@@ -1,6 +1,7 @@
 import './scss/style.scss';
 import { createElement } from './js/createElement.js';
 import { createCard } from './js/createCard.js';
+import { createStat } from './js/createStat.js';
 import {
   CARD_SYMBOLS,
   GAME_STATUS,
@@ -131,16 +132,6 @@ app.append(
     children: [header, gamePanel],
   }),
 );
-
-function createStat(label, valueElement) {
-  return createElement('div', {
-    className: 'stat',
-    children: [
-      createElement('span', { className: 'stat__label', text: label }),
-      valueElement,
-    ],
-  });
-}
 
 function handleCardClick(card, cardElement) {
   if (isLocked || card.isFlipped || card.isMatched) {
