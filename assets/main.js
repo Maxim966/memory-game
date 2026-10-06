@@ -61,7 +61,13 @@ function createCard(card, index, onCardClick) {
 			attributes: { "aria-hidden": "true" },
 			children: [createElement("span", {
 				className: "card__face card__face--front",
-				text: card.symbol
+				children: [createElement("img", {
+					className: "card__image",
+					attributes: {
+						src: card.image,
+						alt: ""
+					}
+				})]
 			}), createElement("span", {
 				className: "card__face card__face--back",
 				text: "★"
@@ -82,17 +88,41 @@ function createStat(label, valueElement) {
 	});
 }
 //#endregion
+//#region src/assets/images/1.png
+var _1_default = "/memory-game/assets/1.png";
+//#endregion
+//#region src/assets/images/2.png
+var _2_default = "/memory-game/assets/2.png";
+//#endregion
+//#region src/assets/images/3.png
+var _3_default = "/memory-game/assets/3.png";
+//#endregion
+//#region src/assets/images/4.png
+var _4_default = "/memory-game/assets/4.png";
+//#endregion
+//#region src/assets/images/5.png
+var _5_default = "/memory-game/assets/5.png";
+//#endregion
+//#region src/assets/images/6.png
+var _6_default = "/memory-game/assets/6.png";
+//#endregion
+//#region src/assets/images/7.png
+var _7_default = "/memory-game/assets/7.png";
+//#endregion
+//#region src/assets/images/8.png
+var _8_default = "/memory-game/assets/8.png";
+//#endregion
 //#region src/js/gameConfig.js
 var RESULT_STORAGE_KEY = "memory-game-results";
-var CARD_SYMBOLS = [
-	"🍋",
-	"🍓",
-	"🍉",
-	"🍇",
-	"🍊",
-	"🍒",
-	"🥝",
-	"🍍"
+var CARD_IMAGES = [
+	_1_default,
+	_2_default,
+	_3_default,
+	_4_default,
+	_5_default,
+	_6_default,
+	_7_default,
+	_8_default
 ];
 var MISMATCH_DELAY = 1e3;
 var GAME_STATUS = {
@@ -322,7 +352,7 @@ function handleCardClick(card, cardElement) {
 	if (isLocked || card.isFlipped || card.isMatched) return;
 	card.isFlipped = true;
 	cardElement.classList.add("card--flipped");
-	cardElement.setAttribute("aria-label", `Открыта карточка: ${card.symbol}`);
+	cardElement.setAttribute("aria-label", `Открыта карточка ${card.position + 1}`);
 	flippedCards.push({
 		card,
 		element: cardElement
@@ -336,13 +366,13 @@ function handleCardClick(card, cardElement) {
 		secondCard.card.isMatched = true;
 		firstCard.element.classList.add("card--matched");
 		secondCard.element.classList.add("card--matched");
-		firstCard.element.setAttribute("aria-label", `Найдена пара: ${firstCard.card.symbol}`);
-		secondCard.element.setAttribute("aria-label", `Найдена пара: ${secondCard.card.symbol}`);
+		firstCard.element.setAttribute("aria-label", `Найдена пара: карточка ${firstCard.card.position + 1}`);
+		secondCard.element.setAttribute("aria-label", `Найдена пара: карточка ${secondCard.card.position + 1}`);
 		foundPairs += 1;
 		flippedCards = [];
-		pairsValue.textContent = `${foundPairs} / ${CARD_SYMBOLS.length}`;
+		pairsValue.textContent = `${foundPairs} / ${CARD_IMAGES.length}`;
 		gameStatus.textContent = GAME_STATUS.matched;
-		if (foundPairs === CARD_SYMBOLS.length) {
+		if (foundPairs === CARD_IMAGES.length) {
 			gameStatus.textContent = GAME_STATUS.won;
 			showVictoryModal();
 		}
@@ -375,14 +405,14 @@ function startNewGame() {
 	foundPairs = 0;
 	isLocked = false;
 	flippedCards = [];
-	cards = shuffle(CARD_SYMBOLS.flatMap((symbol, pairId) => [{
+	cards = shuffle(CARD_IMAGES.flatMap((image, pairId) => [{
 		pairId,
-		symbol,
+		image,
 		isFlipped: false,
 		isMatched: false
 	}, {
 		pairId,
-		symbol,
+		image,
 		isFlipped: false,
 		isMatched: false
 	}])).map((card, position) => ({
@@ -390,7 +420,7 @@ function startNewGame() {
 		position
 	}));
 	updateStats();
-	pairsValue.textContent = `0 / ${CARD_SYMBOLS.length}`;
+	pairsValue.textContent = `0 / ${CARD_IMAGES.length}`;
 	gameStatus.textContent = GAME_STATUS.ready;
 	cardGrid.replaceChildren(...cards.map((card, index) => createCard(card, index, handleCardClick)));
 }

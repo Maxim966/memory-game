@@ -405,6 +405,13 @@ input:focus-visible {
   font-size: clamp(36px, 8vw, 60px);
   transform: rotateY(180deg);
 }
+.card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
 .card__face--back {
   border-color: #f2e4ff;
   background-color: #9b43f1;
