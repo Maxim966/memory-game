@@ -89,28 +89,28 @@ function createStat(label, valueElement) {
 }
 //#endregion
 //#region src/assets/images/1.png
-var _1_default = "/memory-game/assets/1.png";
+var _1_default = "/memory-game/assets/1-DI0jhv52.png";
 //#endregion
 //#region src/assets/images/2.png
-var _2_default = "/memory-game/assets/2.png";
+var _2_default = "/memory-game/assets/2-DARjP98Z.png";
 //#endregion
 //#region src/assets/images/3.png
-var _3_default = "/memory-game/assets/3.png";
+var _3_default = "/memory-game/assets/3-B5IVWZkc.png";
 //#endregion
 //#region src/assets/images/4.png
-var _4_default = "/memory-game/assets/4.png";
+var _4_default = "/memory-game/assets/4-CiRmz9CR.png";
 //#endregion
 //#region src/assets/images/5.png
-var _5_default = "/memory-game/assets/5.png";
+var _5_default = "/memory-game/assets/5-MPQ66X-A.png";
 //#endregion
 //#region src/assets/images/6.png
-var _6_default = "/memory-game/assets/6.png";
+var _6_default = "/memory-game/assets/6-SmCDCeex.png";
 //#endregion
 //#region src/assets/images/7.png
-var _7_default = "/memory-game/assets/7.png";
+var _7_default = "/memory-game/assets/7-dsG0Fx9f.png";
 //#endregion
 //#region src/assets/images/8.png
-var _8_default = "/memory-game/assets/8.png";
+var _8_default = "/memory-game/assets/8-CQxe9tdT.png";
 //#endregion
 //#region src/js/gameConfig.js
 var RESULT_STORAGE_KEY = "memory-game-results";
@@ -559,4 +559,4 @@ function showLeaderboard() {
 startNewGame();
 //#endregion
 
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=main-h1GLBEEq.js.map

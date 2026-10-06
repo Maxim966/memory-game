@@ -1,28 +1,28 @@
 @charset "UTF-8";
 @font-face {
   font-family: "Inter";
-  src: url("/memory-game/assets/InterRegular.woff2") format("woff2");
+  src: url("/memory-game/assets/InterRegular-BVbHMvgz.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Inter";
-  src: url("/memory-game/assets/InterSemiBold.woff2") format("woff2");
+  src: url("/memory-game/assets/InterSemiBold-CT9KWH6x.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Inter";
-  src: url("/memory-game/assets/InterSemiBoldItalic.woff2") format("woff2");
+  src: url("/memory-game/assets/InterSemiBoldItalic-Bq-8ieTY.woff2") format("woff2");
   font-weight: 600;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Inter";
-  src: url("/memory-game/assets/InterBold.woff2") format("woff2");
+  src: url("/memory-game/assets/InterBold-DSd_b5lz.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
