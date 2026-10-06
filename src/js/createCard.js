@@ -15,7 +15,15 @@ export function createCard(card, index, onCardClick) {
         children: [
           createElement('span', {
             className: 'card__face card__face--front',
-            text: card.symbol,
+            children: [
+              createElement('img', {
+                className: 'card__image',
+                attributes: {
+                  src: card.image,
+                  alt: '',
+                },
+              }),
+            ],
           }),
           createElement('span', {
             className: 'card__face card__face--back',

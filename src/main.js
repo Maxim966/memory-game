@@ -3,7 +3,7 @@ import { createElement } from './js/createElement.js';
 import { createCard } from './js/createCard.js';
 import { createStat } from './js/createStat.js';
 import {
-  CARD_SYMBOLS,
+  CARD_IMAGES,
   GAME_STATUS,
   MISMATCH_DELAY,
 } from './js/gameConfig.js';
@@ -140,7 +140,10 @@ function handleCardClick(card, cardElement) {
 
   card.isFlipped = true;
   cardElement.classList.add('card--flipped');
-  cardElement.setAttribute('aria-label', `Открыта карточка: ${card.symbol}`);
+  cardElement.setAttribute(
+    'aria-label',
+    `Открыта карточка ${card.position + 1}`,
+  );
   flippedCards.push({ card, element: cardElement });
 
   if (flippedCards.length < 2) {
@@ -159,18 +162,18 @@ function handleCardClick(card, cardElement) {
     secondCard.element.classList.add('card--matched');
     firstCard.element.setAttribute(
       'aria-label',
-      `Найдена пара: ${firstCard.card.symbol}`,
+      `Найдена пара: карточка ${firstCard.card.position + 1}`,
     );
     secondCard.element.setAttribute(
       'aria-label',
-      `Найдена пара: ${secondCard.card.symbol}`,
+      `Найдена пара: карточка ${secondCard.card.position + 1}`,
     );
     foundPairs += 1;
     flippedCards = [];
-    pairsValue.textContent = `${foundPairs} / ${CARD_SYMBOLS.length}`;
+    pairsValue.textContent = `${foundPairs} / ${CARD_IMAGES.length}`;
     gameStatus.textContent = GAME_STATUS.matched;
 
-    if (foundPairs === CARD_SYMBOLS.length) {
+    if (foundPairs === CARD_IMAGES.length) {
       gameStatus.textContent = GAME_STATUS.won;
       showVictoryModal();
     }
@@ -213,14 +216,14 @@ function startNewGame() {
   isLocked = false;
   flippedCards = [];
   cards = shuffle(
-    CARD_SYMBOLS.flatMap((symbol, pairId) => [
-      { pairId, symbol, isFlipped: false, isMatched: false },
-      { pairId, symbol, isFlipped: false, isMatched: false },
+    CARD_IMAGES.flatMap((image, pairId) => [
+      { pairId, image, isFlipped: false, isMatched: false },
+      { pairId, image, isFlipped: false, isMatched: false },
     ]),
   ).map((card, position) => ({ ...card, position }));
 
   updateStats();
-  pairsValue.textContent = `0 / ${CARD_SYMBOLS.length}`;
+  pairsValue.textContent = `0 / ${CARD_IMAGES.length}`;
   gameStatus.textContent = GAME_STATUS.ready;
   cardGrid.replaceChildren(
     ...cards.map((card, index) =>
